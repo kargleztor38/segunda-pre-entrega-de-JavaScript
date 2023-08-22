@@ -29,11 +29,11 @@ const londres = {
 }
 
 export {
+    inicio,
     barcelona,
     roma,
     paris,
-    londres,
-    inicio
+    londres
 };
 
 // const { barcelona, roma, paris, londres } = require('./ciudades');
