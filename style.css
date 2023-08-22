@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 ul {
@@ -27,7 +28,7 @@ li a.active {
 }
 
 li a:hover:not(.active) {
-    background-color: #555;
+    background-color: #7009d6;
     color: white;
 }
 

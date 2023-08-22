@@ -1,3 +1,9 @@
+const inicio = {
+    titulo: 'Bienvenido a nuestra Web',
+    subtitulo: 'Elija su destino',
+    parrafo: "Compre su mejor paquete de vieje en niestra empresa"
+}
+
 const barcelona = {
     titulo: 'Descubre Barcelona: La joya de Cataluña',
     subtitulo: 'Sumérgete en la historia, cultura y belleza de esta vibrante ciudad',
@@ -26,7 +32,8 @@ export {
     barcelona,
     roma,
     paris,
-    londres
+    londres,
+    inicio
 };
 
 // const { barcelona, roma, paris, londres } = require('./ciudades');

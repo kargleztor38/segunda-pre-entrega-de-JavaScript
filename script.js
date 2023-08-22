@@ -1,4 +1,4 @@
-import { barcelona, roma, paris, londres } from './ciudades.js';
+import { barcelona, roma, paris, londres, inicio } from './ciudades.js';
 
 // Obtener los elementos del html (DOM).
 let enlaces = document.querySelectorAll('a');
@@ -29,7 +29,8 @@ function obtenerContenido(enlace) {
         'Barcelona': barcelona,
         'Roma': roma,
         'París': paris,
-        'Londres': londres
+        'Londres': londres,
+        'Inicio': inicio
     };
     return contenido[enlace];
 }
