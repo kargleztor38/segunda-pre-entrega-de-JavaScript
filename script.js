@@ -1,4 +1,12 @@
-import { barcelona, roma, paris, londres, inicio } from './ciudades.js';
+import { inicio, barcelona, roma, paris, londres } from './ciudades.js';
+
+const arrayParaCiudades = [
+    inicio,
+    barcelona,
+    roma,
+    paris,
+    londres
+];
 
 // Obtener los elementos del html (DOM).
 let enlaces = document.querySelectorAll('a');
@@ -19,18 +27,18 @@ enlaces.forEach(function (enlace) {
         // Agregar el contenido de los objetos provenientes de ciudades.js
         tituloElemento.innerHTML = contenido.titulo;
         subtituloElemento.innerHTML = contenido.subtitulo;
-        parrafoElemento.innerHTML = contenido.parrafo; 
+        parrafoElemento.innerHTML = contenido.parrafo;
     })
 })
 
 // Funcion para traer el contenido correspodiete de ciudades
 function obtenerContenido(enlace) {
     let contenido = {
-        'Barcelona': barcelona,
-        'Roma': roma,
-        'París': paris,
-        'Londres': londres,
-        'Inicio': inicio
+        'Inicio': arrayParaCiudades[0],
+        'Barcelona': arrayParaCiudades[1],
+        'Roma': arrayParaCiudades[2],
+        'París': arrayParaCiudades[3],
+        'Londres': arrayParaCiudades[4]
     };
     return contenido[enlace];
 }
