@@ -36,5 +36,17 @@ li a:hover:not(.active) {
 .contenedor {
     margin-left: 25%;
     padding: 1px 16px;
-    height: 1000px;
+}
+
+.entrada {
+    padding: 15px 25px;
+    background: rgb(252, 185, 0);
+    border: none;
+    border-radius: 7px;
+    margin: 50px 0 30px;
+    transition: .5s;
+}
+
+.entrada:hover {
+    background: rgb(253, 205, 72);
 }
