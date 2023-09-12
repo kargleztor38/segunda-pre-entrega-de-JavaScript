@@ -1,140 +1,64 @@
-import { inicio, barcelona, roma, paris, londres } from './ciudades.js';
-
-const arrayCiudades = [
-    inicio,
-    barcelona,
-    roma,
-    paris,
-    londres
-];
-
-// Obtener los elementos del html (DOM).
-let enlaces = document.querySelectorAll('a');
-let tituloElemento = document.getElementById('titulo');
-let subtituloElemento = document.getElementById('subtitulo');
-let parrafoElemento = document.getElementById('parrafo');
-
-
-enlaces.forEach(function (recorridoEnlaces) {
-    recorridoEnlaces.addEventListener('click', function () {
-        enlaces.forEach(function (recorridoEnlaces) {
-            recorridoEnlaces.classList.remove('active');
-        })
-
-        this.classList.add('active');
-
-        let contenido = contenidoCiudades(this.textContent);
-
-        tituloElemento.innerHTML = contenido.titulo;
-        subtituloElemento.innerHTML = contenido.subtitulo;
-        parrafoElemento.innerHTML = contenido.parrafo;
-    })
-})
-
-
-function contenidoCiudades(recorridoEnlaces) {
-    let contenido = {
-        'Inicio': arrayCiudades[0],
-        'Barcelona': arrayCiudades[1],
-        'Roma': arrayCiudades[2],
-        'París': arrayCiudades[3],
-        'Londres': arrayCiudades[4]
+// Función para obtener tareas del almacenamiento local.
+function obtenerTarea() {
+    let tareas;
+    if (localStorage.getItem('tareas') === null) {
+        tareas = [];
+    } else {
+        tareas = JSON.parse(localStorage.getItem('tareas'));
     }
-    return contenido[recorridoEnlaces];
+    return tareas;
 }
 
-let boton = document.getElementById('entrada');
+// Función para agregar una tarea
+function agregarTarea(tarea) {
+    const tareas = obtenerTarea();
+    tareas.push(tarea);
+    localStorage.setItem('tareas', JSON.stringify(tareas));
+}
 
-boton.addEventListener('click', function () {
+// Función para eliminar una tarea
+function eliminarTarea(textoTarea) {
+    const tareas = obtenerTarea();
+    const index = tareas.indexOf(textoTarea);
+    if (index !== -1) {
+        tareas.splice(index, 1);
+    }
+    localStorage.setItem('tareas', JSON.stringify(tareas));
+}
 
-    const historial = [];
 
-    while (true) {
-        const menu = prompt("Elija el viaje que desea realizar \n1. Barcelona \n2. Roma \n3. París \n4. Londres \n5. Historial \n6. Salir")
+// Función para mostrar tareas en el DOM
+function mostrarTareas() {
+    const tareas = obtenerTarea();
+    const ul = document.getElementById('listaTarea');
+    ul.innerHTML = "";
+    tareas.forEach(function(textoTarea) {
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(textoTarea));
+        const btnBorrar = document.createElement('button');
+        btnBorrar.appendChild(document.createTextNode('Borrar'));
+        li.appendChild(btnBorrar);
+        ul.appendChild(li);
+    });
+}
 
-        if (menu === "1") {
-            let seleccionViaje = prompt('El recorido por barcelona es de: \n1. $200 tres dias, \n2. $250 cinco dias')
-            switch (seleccionViaje) {
-                case '1':
-                    historial.push(`${seleccionViaje} Barcelona tres dias`);
-                    alert('Felicidades su recorido por barcelona ha sido recervado');
-                    break;
-                case '2':
-                    historial.push(`${seleccionViaje} Barcelona cinco dias`);
-                    alert('Felicidades su recorido por barcelona ha sido recervado');
-                    break;
+// Oyente de eventos para envío de formularios
+document.getElementById('formularioTarea').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const textoTarea = document.getElementById('tarea').value;
+    agregarTarea(textoTarea);
+    document.getElementById('tarea').value = '';
+    mostrarTareas();
+});
 
-                default:
-                    alert("Esta obcion no es correcta, elija una de la lista")
-                    break;
-            }
-
-        } else if (menu === "2") {
-            let seleccionViaje = prompt('El recorido por Roma es de: \n1. $300 tres dias')
-            switch (seleccionViaje) {
-                case '1':
-                    historial.push(`${seleccionViaje} Roma tres dias`);
-                    alert('Felicidades su recorido por Roma ha sido recervado');
-                    break;
-
-                default:
-                    alert("Esta obcion no es correcta, elija una de la lista")
-                    break;
-            }
-
-        } else if (menu === "3") {
-            let seleccionViaje = prompt('El recorido por París es de: \n1. $350 Dos dias \n2 $400 Cuatro dias')
-            switch (seleccionViaje) {
-                case '1':
-                    historial.push(`${seleccionViaje} París tres dias`);
-                    alert('Felicidades su recorido por París ha sido recervado');
-                    break;
-                case '2':
-                    historial.push(`${seleccionViaje} París Cuatro dias`);
-                    alert('Felicidades su recorido por París ha sido recervado');
-                    break;
-
-                default:
-                    alert("Esta obcion no es correcta, elija una de la lista")
-                    break;
-            }
-
-        } else if (menu === "4") {
-            let seleccionViaje = prompt('El recorido por Londres es de: \n1. $390 dos dias')
-            switch (seleccionViaje) {
-                case '1':
-                    historial.push(`${seleccionViaje} Londres tres dias`);
-                    alert('Felicidades su recorido por Londres ha sido recervado');
-                    break;
-
-                default:
-                    alert("Esta obcion no es correcta, elija una de la lista")
-                    break;
-            }
-
-        } else if (menu === "5") {
-
-            if (historial.length === 0) {
-
-                alert('No hay compras realizadas')
-
-            } else {
-
-                alert('Historial de compras es:\n' + historial.join("\n"));
-
-            }
-
-        } else if (menu === "6") {
-
-            alert("Gracias pro usar nuestro programa. vuelva pronto");
-
-            break;
-
-        } else {
-
-            alert('Obcion incorrecta. Porfavor introdusca una obcion valida');
-
-        };
+// Oyente de eventos para eliminación de tareas
+document.getElementById('listaTarea').addEventListener('click', function (e) {
+    if (e.target.tagName === 'BUTTON') {
+        const textoTarea = e.target.parentElement.firstChild.textContent;
+        eliminarTarea(textoTarea);
+        mostrarTareas();
     };
 });
 
+// Visualización inicial de tareas.
+mostrarTareas();

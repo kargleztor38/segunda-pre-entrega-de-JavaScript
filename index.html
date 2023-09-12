@@ -3,32 +3,21 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pre-entrega-2 de Javascript</title>
+    <title>pre-entrega 3</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    
-    <ul>
-        <li><a>Inicio</a></li>
-        <li><a>Barcelona</a></li>
-        <li><a>Roma</a></li>
-        <li><a>París</a></li>
-        <li><a>Londres</a></li>
-    </ul>
+    <h1>Lista de tareas</h1>
+    <form id="formularioTarea" class="form">
+        <input type="text" id="tarea" class="input" placeholder="Agregar tarea" required>
+        <button type="submit" class="boton">Agregar</button>
+    </form>
+    <ul id="listaTarea"></ul>
 
 
-
-    <div class="contenedor">      
-        <button id="entrada" class="entrada">Compras</button>
-        <h2 id="titulo"></h2>
-        <h3 id="subtitulo"></h3>
-        <p id="parrafo"></p>
-    </div>
-
-    <script type="module" src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
